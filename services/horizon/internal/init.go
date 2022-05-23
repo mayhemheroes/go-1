@@ -55,6 +55,7 @@ func mustInitHorizonDB(app *App) {
 				db.StatementTimeout(app.config.ConnectionTimeout),
 				db.IdleTransactionTimeout(app.config.ConnectionTimeout),
 			)
+			log.WithField("clientConfigs", clientConfigs).Info("clientConfigs")
 		}
 		app.historyQ = &history.Q{mustNewDBSession(
 			db.HistorySubservice,
@@ -70,6 +71,7 @@ func mustInitHorizonDB(app *App) {
 			db.StatementTimeout(app.config.ConnectionTimeout),
 			db.IdleTransactionTimeout(app.config.ConnectionTimeout),
 		}
+		log.WithField("clientConfigs", roClientConfigs).Info("roClientConfigs")
 		app.historyQ = &history.Q{mustNewDBSession(
 			db.HistorySubservice,
 			app.config.RoDatabaseURL,

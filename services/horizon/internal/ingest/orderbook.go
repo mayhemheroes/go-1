@@ -132,12 +132,13 @@ func (o *OrderBookStream) update(ctx context.Context, status ingestionStatus) (b
 
 		defer o.graph.Discard()
 
+		startTime := time.Now()
 		err := o.historyQ.StreamAllOffers(ctx, func(offer history.Offer) error {
 			o.graph.AddOffers(offerToXDR(offer))
 			return nil
 		})
-
 		if err != nil {
+			log.WithField("elapsed", time.Since(startTime)).WithError(err).Info("StreamAllOffers")
 			return true, errors.Wrap(err, "Error loading offers into orderbook")
 		}
 
