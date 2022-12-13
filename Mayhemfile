@@ -1,0 +1,7 @@
+project: stellar-go
+target: stellar-go
+
+# List of commands used to test the target
+cmds:
+  - cmd: /fuzz_strkey_decode
+    env: {}
