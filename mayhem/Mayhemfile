@@ -1,0 +1,4 @@
+project: go
+target: go-xdr-jsonclaimpredicate-fuzz
+cmds:
+  - cmd: ./xdr-jsonclaimpredicate-fuzz.libfuzzer
